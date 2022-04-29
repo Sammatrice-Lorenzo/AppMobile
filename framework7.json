@@ -1,0 +1,19 @@
+{
+  "cwd": "C:\\Users\\loren\\OneDrive\\Documents\\Licence\\Dev Mobile\\AppMobile",
+  "type": [
+    "pwa"
+  ],
+  "name": "DemoSTS",
+  "framework": "core",
+  "template": "single-view",
+  "bundler": "vite",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#ff0000",
+    "darkTheme": true,
+    "iconFonts": true,
+    "fillBars": true
+  },
+  "customBuild": false
+}
