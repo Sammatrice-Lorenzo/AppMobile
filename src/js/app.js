@@ -18,18 +18,3 @@ import store from './store.js';
 import App from '../app.f7';
 
 
-var app = new Framework7({
-  name: 'DemoSTS', // App name
-  theme: 'auto', // Automatic theme detection
-  el: '#app', // App root element
-  component: App, // App main component
-
-  // App store
-  store: store,
-  // App routes
-  routes: routes,
-  // Register service worker (only on production build)
-  serviceWorker: process.env.NODE_ENV ==='production' ? {
-    path: '/service-worker.js',
-  } : {},
-});
