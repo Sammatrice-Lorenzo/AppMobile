@@ -21,25 +21,6 @@
         <div class="page-content">
             <div class="block block-strong">
                 <p>Listes</p>
-
-                <p><a class="toggle" href="#example3">Liste 1</a></p>
-                <div class="toggle-content" id="example3">
-                    <ul>
-                        <li>Element 1</li>
-                        <li>Element 2</li>
-                        <li>Element 3</li>
-                    </ul>
-                </div>
-
-                <a class="toggle" href="#example4">Liste 2</a>
-                <div class="toggle-content" id="example4">
-                    <ul>
-                        <li>Element 1</li>
-                        <li>Element 2</li>
-                        <li>Element 3</li>
-                    </ul>
-                </div>
-
             </div>
         </div>
     </div>

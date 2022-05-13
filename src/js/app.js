@@ -16,7 +16,7 @@ import store from './store.js';
 
 // Import main app component
 import App from '../app.f7';
-
+import { find } from 'dom7';
 // Copy of scipt from Chris Ferdinandi https://jsfiddle.net/4rw75dqz/
 
 // Show an element
@@ -105,12 +105,18 @@ var app = new Framework7({
     serviceWorker: process.env.NODE_ENV ==='production' ? {
         path: '/service-worker.js',
     } : {},
-  
+
 });
 app.request.get('http://localhost/licence/API_TodoList/list.php').then(function (res) {
     var response = JSON.parse(res.data)
     for(const i of response) {
-        console.log(i.name)
+        // console.log(i.name)
+		$('.block-strong').append(`
+			<p><a class="toggle" href="">${i.name}</a></p>
+			<div class="toggle-content" id="">
+				<ul></ul>
+			</div>
+		`);
     }
 }).catch(function (err) {
     console.log(err.xhr)
