@@ -13,6 +13,8 @@ import '../css/app.css';
 import routes from './routes.js';
 // Import Store
 import store from './store.js';
+//Import list
+import list from './list.js';
 
 // Import main app component
 import App from '../app.f7';
@@ -99,6 +101,7 @@ var app = new Framework7({
 
     // App store
     store: store,
+    list: list,
     // App routes
     routes: routes,
     // Register service worker (only on production build)
@@ -107,19 +110,3 @@ var app = new Framework7({
     } : {},
 
 });
-app.request.get('http://localhost/licence/API_TodoList/list.php').then(function (res) {
-    var response = JSON.parse(res.data)
-    for(const i of response) {
-        // console.log(i.name)
-		$('.block-strong').append(`
-			<p><a class="toggle" href="">${i.name}</a></p>
-			<div class="toggle-content" id="">
-				<ul></ul>
-			</div>
-		`);
-    }
-}).catch(function (err) {
-    console.log(err.xhr)
-    console.log(err.status)
-    console.log(err.message)
-})
