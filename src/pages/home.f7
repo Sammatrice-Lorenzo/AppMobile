@@ -21,6 +21,7 @@
         <div class="page-content">
             <div class="divListes">
                 <p>Listes</p>
+                <a class="button button-small button-round button-fill add" href="/form/">Ajouter des list</a>
             </div>
         </div>
     </div>
@@ -29,7 +30,6 @@
     export default () => {
         return $render;
     }
-
 
     function toggle(id) {
         a = document.getElementById('toggle_' + id);

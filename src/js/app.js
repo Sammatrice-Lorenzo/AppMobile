@@ -13,6 +13,8 @@ import '../css/app.css';
 import routes from './routes.js';
 // Import Store
 import store from './store.js';
+//Import list
+import list from './list.js';
 
 // Import main app component
 import App from '../app.f7';
@@ -99,6 +101,7 @@ var app = new Framework7({
 
     // App store
     store: store,
+    list: list,
     // App routes
     routes: routes,
     // Register service worker (only on production build)
@@ -197,5 +200,3 @@ function showTachesTypes() {
 
 
 }
-
-
