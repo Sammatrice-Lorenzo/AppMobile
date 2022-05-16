@@ -99,11 +99,27 @@ h2 {
   margin: 3rem 0 1.5rem;
 }
 
-p {
-  margin-bottom: 1.5rem;
+
+.nomListe {
+  color: #171615;
 }
 
-a {
-  color: #171615;
-  font-weight: bold;
+.liste{
+  font-size:10px;
+}
+.liste, .nomListe{
+  color:black;
+}
+
+.tache p:not(:first-of-type){
+  display: inline;
+}
+
+.tache p{
+  margin:0;
+  padding:0;
+}
+.tache{
+  margin:20px 0px;
+
 }

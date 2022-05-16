@@ -19,7 +19,7 @@
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div class="block block-strong">
+            <div class="divListes">
                 <p>Listes</p>
             </div>
         </div>
