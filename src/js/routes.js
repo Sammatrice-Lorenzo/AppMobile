@@ -4,6 +4,7 @@ import Taches from '../pages/taches.f7';
 import AboutPage from '../pages/about.f7';
 import FormPage from '../pages/form.f7';
 import FormUpdateList from '../pages/formUpdateList.f7';
+import FormTache from '../pages/formTache.f7';
 
 
 import DynamicRoutePage from '../pages/dynamic-route.f7';
@@ -35,6 +36,10 @@ var routes = [
     {
         path: '/form/',
         component: FormPage,
+    },
+    {
+        path: '/formTache/:id',
+        component: FormTache,
     },
     {
         path: '/formUpdateList/:name/:id',

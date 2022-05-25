@@ -30,7 +30,6 @@
         <div class="page-content">
             <div class="divTaches">
                 <p>Taches</p>
-                <a class='button button-small button-round button-fill add' href='/form/' style="margin-top: 15px;"><i class="f7-icons if-not-md">insert</i></a>
             </div>
         </div>
     </div>
@@ -39,12 +38,13 @@
     import Dom7 from 'Dom7';
     import Framework7 from 'framework7/bundle';
 
-    export default (props, { $on, $f7, $f7router }) => {
+    export default (props, { $on, $f7, $f7router}) => {
         $on('pageInit', () => {
             var $$ = Dom7;
             var idList = $f7router.currentRoute.params.id
             var nameList = $f7router.currentRoute.params.name
 
+            $$('.divTaches').append(`<a class='button' href='/formTache/${idList}' style="margin-top: 15px;"><i class="f7-icons if-not-md">plus_rectangle</i></a>`);
             $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}">Modifier la list</a></p>`);
 
 

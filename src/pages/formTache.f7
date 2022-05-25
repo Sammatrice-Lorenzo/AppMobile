@@ -13,19 +13,29 @@
             </div>
         </div>
         <div class="page-content">
-            <form class="list" id="my-form">
+            <form class="tache" id="my-form">
                 <div class="block-title">Tâche</div>
-                <div class="list no-hairlines-md">
+                <div class="tache no-hairlines-md">
                     <ul>
                         <li>
                             <div class="item-content item-input">
                                 <div class="item-inner">
-                                <div class="item-title item-label">Nom</div>
-                                <div class="item-input-wrap">
-                                    <input class="listName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
-                                </div>
+                                    <div class="item-title item-label" style="margin-left: 10px;">Nom</div>
+                                    <div class="item-input-wrap">
+                                        <input class="tacheName required" name="nom" type="text"
+                                            placeholder="Le nom de la tâche" style="margin-left: 10px;" />
+                                    </div>
                                 </div>
                             </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="listeTypes" style="margin-top: 20px;">
+                    <ul>
+                        <li>
+                            <select id="selectTypes" name="idType">
+                                <option value="type">Veuillez sélection un type</option>
+                            </select>
                         </li>
                     </ul>
                 </div>
@@ -41,27 +51,43 @@
 <script>
     import Dom7 from 'Dom7';
     import Framework7 from 'framework7/bundle';
-    export default (props, {$on, $f7 }) => {
+    export default (props, { $on, $f7, $f7router}) => {
         $on('pageInit', () => {
             var $$ = Dom7;
 
+            var list = $f7router.currentRoute.params.id
             Framework7.request.setup({
                 headers: {
                     'Authorization': 'sometokenvalue'
                 }
             })
 
-            function addInvalidMsg(el, msg)
-            {
+            Framework7.request.get('http://localhost/licence/API_TodoList/type.php').then(function (res) {
+                var response = JSON.parse(res.data)
+                for (const i of response) {
+                    $$('#selectTypes').append(`
+                        <option value='${i.id}'>${i.name}</option>
+                    `)
+                }
+                console.log(response)
+            }).catch(function (err) {
+                console.log(err.xhr)
+                console.log(err.status)
+                console.log(err.message)
+            })
+
+
+            function addInvalidMsg(el, msg) {
                 $$(el).closest(".item-content").addClass("item-input-with-error-message item-input-invalid");
-                $$(el).addClass("input-invalid"); 
-                $$( "<div class='item-input-error-message'>" +msg +"</div>" ).insertAfter( el );
+                $$(el).addClass("input-invalid");
+                $$("<div class='item-input-error-message'>" + msg + "</div>").insertAfter(el);
             }
 
             $$('.button-insert').on('click', function () {
                 var formData = $f7.form.convertToData('#my-form');
-                if(formData.nom) {
-                    Framework7.request.postJSON('http://localhost/licence/API_TodoList/tache.php', formData).then(function (res) {
+                console.log(formData)
+                if (formData.nom) {
+                    Framework7.request.postJSON('http://localhost/licence/API_TodoList/tache.php', {nom : formData.nom, idType : formData.idType, idlist : list}).then(function (res) {
                         console.log("success")
                     }).catch(function (err) {
                         console.log(err.xhr)
@@ -69,8 +95,9 @@
                         console.log(err.message)
                     })
                 }
+                else if(formData.idType == "type") addInvalidMsg($$('.selectTypes'), "Veuillez sélectionner un type valide")
                 else {
-                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une tâche !")
+                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tâche !")
                 }
             });
         });
