@@ -1,0 +1,83 @@
+<template>
+    <div class="page" data-name="taches">
+        <!-- Top Navbar -->
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="navbar-inner sliding">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back">
+                                <!-- <span class="if-not-md">Retour</span> -->
+                            </i>
+                        </a>
+                    </div>
+                    <div class="title-large">
+                        <div class="title-large-text title-list"></div>
+                        <label id='idList' class='' style="display: none;"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Toolbar-->
+        <div class="toolbar toolbar-bottom">
+            <div class="toolbar-inner">
+                <a href="#" class="link">Left Link</a>
+                <a href="#" class="link">Right Link</a>
+            </div>
+        </div>
+        <!-- Scrollable page content-->
+        <div class="page-content">
+            <div class="divTaches">
+                <p>Taches</p>
+                <a class='button button-small button-round button-fill add' href='/form/' style="margin-top: 15px;"><i class="f7-icons if-not-md">insert</i></a>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import Dom7 from 'Dom7';
+    import Framework7 from 'framework7/bundle';
+
+    export default (props, { $on, $f7, $f7router }) => {
+        $on('pageInit', () => {
+            var $$ = Dom7;
+            var idList = $f7router.currentRoute.params.id
+            var nameList = $f7router.currentRoute.params.name
+
+            $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}">Modifier la list</a></p>`);
+
+
+            Framework7.request.get('http://localhost/licence/API_TodoList/tache.php').then(function (res) {
+                var response = JSON.parse(res.data)
+                for (const i of response) {
+                    $$('.divTaches').append(`
+                            <p><a class="toggle" href="/taches/${i.name}/${i.id}">${i.name}</a></p>
+                            <div class="toggle-content" id="">
+                                <ul></ul>
+                            </div>
+                        `);
+                }
+            }).catch(function (err) {
+                console.log(err.xhr)
+                console.log(err.status)
+                console.log(err.message)
+            })
+        });
+
+        return $render;
+    };
+
+    function toggle(id) {
+        a = document.getElementById('toggle_' + id);
+        b = document.getElementById('display_' + id);
+        if (a.style.display == 'block') {
+            a.style.display = 'none';
+            b.innerHTML = 'Show Discussion';
+        }
+        else {
+            a.style.display = 'block';
+            b.innerHTML = 'Hide Discussion';
+        }
+    }
+</script>

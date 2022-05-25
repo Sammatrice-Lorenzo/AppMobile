@@ -9,12 +9,12 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">Ajout List</div>
+                <div class="title">Ajout Tâche</div>
             </div>
         </div>
         <div class="page-content">
             <form class="list" id="my-form">
-                <div class="block-title">List</div>
+                <div class="block-title">Tâche</div>
                 <div class="list no-hairlines-md">
                     <ul>
                         <li>
@@ -22,7 +22,7 @@
                                 <div class="item-inner">
                                 <div class="item-title item-label">Nom</div>
                                 <div class="item-input-wrap">
-                                    <input class="listName required" name="nom" type="text" placeholder="Le nom de la list"/>
+                                    <input class="listName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
                                 </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
             $$('.button-insert').on('click', function () {
                 var formData = $f7.form.convertToData('#my-form');
                 if(formData.nom) {
-                    Framework7.request.postJSON('http://localhost/licence/API_TodoList/list.php', formData).then(function (res) {
+                    Framework7.request.postJSON('http://localhost/licence/API_TodoList/tache.php', formData).then(function (res) {
                         console.log("success")
                     }).catch(function (err) {
                         console.log(err.xhr)
@@ -70,7 +70,7 @@
                     })
                 }
                 else {
-                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une list !")
+                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une tâche !")
                 }
             });
         });

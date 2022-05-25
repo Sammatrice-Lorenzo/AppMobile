@@ -1,5 +1,6 @@
 
 import HomePage from '../pages/home.f7';
+import Taches from '../pages/taches.f7';
 import AboutPage from '../pages/about.f7';
 import FormPage from '../pages/form.f7';
 import FormUpdateList from '../pages/formUpdateList.f7';
@@ -14,6 +15,18 @@ var routes = [
     {
         path: '/',
         component: HomePage,
+    },
+    {
+        path: '/taches/:name/:id',
+        component: Taches,
+        on: 
+        {
+            pageInit: function(e,page){ 
+                var prop = page.route.params;
+                var title = $('.title-list')[0]
+                $(title).append(`<label class='${prop.name}'>${prop.name}</label>`) 
+            }
+        },
     },
     {
         path: '/about/',
