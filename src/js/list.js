@@ -6,7 +6,6 @@ const list = (
     Framework7.request.get('http://localhost/licence/API_TodoList/list.php').then(function (res) {
         var response = JSON.parse(res.data)
         for(const i of response) {
-            // <p><a class="toggle" href="/formUpdateList/${i.name}/${i.id}">${i.name}</a></p>
             $('.divList').append(`
                 <p><a class="toggle" href="/taches/${i.name}/${i.id}">${i.name}</a></p>
                 <div class="toggle-content" id="">

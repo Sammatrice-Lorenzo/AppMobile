@@ -22,7 +22,7 @@
                                 <div class="item-inner">
                                 <div class="item-title item-label">Nom</div>
                                 <div class="item-input-wrap">
-                                    <input class="listName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
+                                    <input class="tacheName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
                                 </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                     })
                 }
                 else {
-                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une tâche !")
+                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tâche !")
                 }
             });
         });
