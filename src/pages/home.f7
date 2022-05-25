@@ -19,9 +19,9 @@
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div class="divListes">
+            <div class="divList">
                 <p>Listes</p>
-                <a class="button button-small button-round button-fill add" href="/form/">Ajouter des list</a>
+                <a class="button button-small button-rou.nd button-fill add" href="/form/">Ajouter des list</a>
             </div>
         </div>
     </div>

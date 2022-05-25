@@ -1,0 +1,109 @@
+<template>
+    <div class="page" data-name="form">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Retour</span>
+                    </a>
+                </div>
+                <div class="title">Modifier la list</div>
+            </div>
+        </div>
+        <div class="page-content">
+            <form class="list" id="my-form">
+                <div class="block-title">List</div>
+                <div class="list no-hairlines-md">
+                    <ul>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Nom</div>
+                                    <div class="item-input-wrap">
+                                        <input class="listName required" name="nom" type="text" id="nameList" placeholder="Le nom de la list" />
+                                        <input name="idList" type="text" id="idList" style="display: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <div class="block-title">
+                <p class="row">
+                    <a id="button-insert" class="button button-round button-fill button-insert">Enregister</a>
+                </p>
+                <p class="row">
+                    <a id="button-delete" class="button button-round button-fill button-delete">Supprimer</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import Dom7 from 'Dom7';
+    import Framework7 from 'framework7/bundle';
+
+    export default (props, { $on, $f7 }) => {
+        var $$ = Dom7;
+        $on('pageInit', () => {
+
+            Framework7.request.setup({
+                headers: {
+                    'Authorization': 'sometokenvalue'
+                }
+            })
+
+            function addInvalidMsg(el, msg) {
+                $$(el).closest(".item-content").addClass("item-input-with-error-message item-input-invalid");
+                $$(el).addClass("input-invalid");
+                $$("<div class='item-input-error-message'>" + msg + "</div>").insertAfter(el);
+            }
+
+            $$('.button-insert').on('click', function () {
+                var formData = $f7.form.convertToData('#my-form');
+                console.log(formData)
+                if (formData.nom) {
+                    Framework7.request({
+                        url: "http://localhost/licence/API_TodoList/list.php",
+                        dataType: 'json',
+                        contentType: "application/json",
+                        method: 'PUT',
+                        data: formData,
+                        success: function (data, status, xhr) {
+                            console.log(data);
+                        },
+                    })
+                }
+                else {
+                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une list !")
+                }
+            });
+            
+            $$('.button-delete').on('click', function () {
+                var formData = $f7.form.convertToData('#my-form');
+                if(confirmer()) {
+                    Framework7.request({
+                        url: "http://localhost/licence/API_TodoList/list.php",
+                        dataType: 'json',
+                        contentType: "application/json",
+                        method: 'DELETE',
+                        data: {"id" : formData.idList},
+                        success: function (data, status, xhr) {
+                            console.log(data);
+                        },
+                    })
+                }
+            });
+        });
+
+        function confirmer() {
+            var res = confirm("Êtes-vous sûr de vouloir supprimer?");
+            return res;
+        }
+
+        return $render;
+    };
+</script>
