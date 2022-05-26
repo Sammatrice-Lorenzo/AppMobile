@@ -30,8 +30,9 @@
 <script>
     export default () => {
         return $render;
+        
     }
-
+    
     function toggle(id) {
         a = document.getElementById('toggle_' + id);
         b = document.getElementById('display_' + id);

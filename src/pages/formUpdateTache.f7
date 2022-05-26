@@ -116,7 +116,7 @@
                         dataType: 'json',
                         contentType: "application/json",
                         method: 'DELETE',
-                        data: {"id" : formData.idTache},
+                        data: {nom: formData.nom, idType: formData.idType, idList: list, id: idTache},
                         success: function (data, status, xhr) {
                             console.log(data);
                         },
