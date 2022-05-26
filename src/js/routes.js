@@ -5,7 +5,7 @@ import AboutPage from '../pages/about.f7';
 import FormPage from '../pages/form.f7';
 import FormUpdateList from '../pages/formUpdateList.f7';
 import FormTache from '../pages/formTache.f7';
-
+import FormUpdateTache from '../pages/formUpdateTache.f7';
 
 import DynamicRoutePage from '../pages/dynamic-route.f7';
 import RequestAndLoad from '../pages/request-and-load.f7';
@@ -53,8 +53,19 @@ var routes = [
             }
         },
     },
-
-
+    {
+        path: '/formUpdateTache/:name/:id/:idList',
+        component: FormUpdateTache,
+        on: 
+        {
+            pageInit: function(e,page){ 
+                var prop = page.route.params;
+                console.log( $('#nameTache') );
+                $('#nameTache').value(prop.name)
+                $('#idTache').value(prop.id)
+            }
+        },
+    },
     {
         path: '/dynamic-route/blog/:blogId/post/:postId/',
         component: DynamicRoutePage,

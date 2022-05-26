@@ -20,11 +20,10 @@
                         <li>
                             <div class="item-content item-input">
                                 <div class="item-inner">
-                                    <div class="item-title item-label" style="margin-left: 10px;">Nom</div>
-                                    <div class="item-input-wrap">
-                                        <input class="tacheName required" name="nom" type="text"
-                                            placeholder="Le nom de la tâche" style="margin-left: 10px;" />
-                                    </div>
+                                <div class="item-title item-label">Nom</div>
+                                <div class="item-input-wrap">
+                                    <input class="tacheName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
+                                </div>
                                 </div>
                             </div>
                         </li>

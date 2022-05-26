@@ -1,0 +1,135 @@
+<template>
+    <div class="page" data-name="form">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Retour</span>
+                    </a>
+                </div>
+                <div class="title">Modifier la tache</div>
+            </div>
+        </div>
+        <div class="page-content">
+            <form class="list" id="my-form">
+                <div class="block-title">Tache</div>
+                <div class="list no-hairlines-md">
+                    <ul>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Nom</div>
+                                    <div class="item-input-wrap">
+                                        <input class="tacheName required" name="nom" type="text" id="nameTache" placeholder="Le nom de la tache" />
+                                        <input name="idTache" type="text" id="idTache" style="display: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="listeTypes" style="margin-top: 20px;">
+                    <ul>
+                        <li>
+                            <select id="selectTypes" name="idType">
+                                <option value="type">Veuillez sélection un type</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <div class="block-title">
+                <p class="row">
+                    <a id="button-insert" class="button button-round button-fill button-insert">Enregister</a>
+                </p>
+                <p class="row">
+                    <a id="button-delete" class="button button-round button-fill button-delete">Supprimer</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import Dom7 from 'Dom7';
+    import Framework7 from 'framework7/bundle';
+
+    export default (props, { $on, $f7, $f7router }) => {
+        var $$ = Dom7;
+        $on('pageInit', () => {
+
+            var list = $f7router.currentRoute.params.idList
+            var idTache = $f7router.currentRoute.params.id
+
+            Framework7.request.setup({
+                headers: {
+                    'Authorization': 'sometokenvalue'
+                }
+            })
+
+            function addInvalidMsg(el, msg) {
+                $$(el).closest(".item-content").addClass("item-input-with-error-message item-input-invalid");
+                $$(el).addClass("input-invalid");
+                $$("<div class='item-input-error-message'>" + msg + "</div>").insertAfter(el);
+            }
+
+            Framework7.request.get('http://localhost/licence/API_TodoList/type.php').then(function (res) {
+                var response = JSON.parse(res.data)
+                for (const i of response) {
+                    $$('#selectTypes').append(`
+                        <option value='${i.id}'>${i.name}</option>
+                    `)
+                }
+                console.log(response)
+            }).catch(function (err) {
+                console.log(err.xhr)
+                console.log(err.status)
+                console.log(err.message)
+            })
+            
+            $$('.button-insert').on('click', function () {
+                var formData = $f7.form.convertToData('#my-form');
+                console.log(formData)
+                if (formData.nom) {
+                    Framework7.request({
+                        url: "http://localhost/licence/API_TodoList/tache.php",
+                        dataType: 'json',
+                        contentType: "application/json",
+                        method: 'PUT',
+                        data: {nom: formData.nom, idType: formData.idType, idList: list, id: idTache},
+                        success: function (data, status, xhr) {
+                            console.log(data);
+                        },
+                    })
+                }
+                else {
+                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tache !")
+                }
+            });
+            
+            $$('.button-delete').on('click', function () {
+                var formData = $f7.form.convertToData('#my-form');
+                if(confirmer()) {
+                    Framework7.request({
+                        url: "http://localhost/licence/API_TodoList/tache.php",
+                        dataType: 'json',
+                        contentType: "application/json",
+                        method: 'DELETE',
+                        data: {"id" : formData.idTache},
+                        success: function (data, status, xhr) {
+                            console.log(data);
+                        },
+                    })
+                }
+            });
+        });
+
+        function confirmer() {
+            var res = confirm("Êtes-vous sûr de vouloir supprimer?");
+            return res;
+        }
+
+        return $render;
+    };
+</script>

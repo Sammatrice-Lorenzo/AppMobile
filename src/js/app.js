@@ -110,3 +110,93 @@ var app = new Framework7({
     } : {},
 
 });
+app.request.get('http://localhost/licence/API_TodoList/list.php').then(function (res) {
+    var response = JSON.parse(res.data)
+    for(const i of response) {
+		$('.divListes').append(`
+			<p class="nomListe"><a class="" href="">${i.name}</a></p>
+			<div class="liste liste-${i.id}">
+				
+			</div>
+		`);
+    }
+
+	
+}).catch(function (err) {
+    console.log(err.xhr)
+    console.log(err.status)
+    console.log(err.message)
+})
+
+app.request.get('http://localhost/licence/API_TodoList/tache.php').then(function (res) {
+    var response = JSON.parse(res.data)
+    for(const i of response) {
+		$('.liste-'+i.idlist).append(`
+			<div class="tache tache-${i.id}">
+				<p>${i.name}</p>
+			</div>
+
+		`);
+    }
+
+	
+}).catch(function (err) {
+    console.log(err.xhr)
+    console.log(err.status)
+    console.log(err.message)
+})
+showTachesTypesParents();
+
+function showTachesTypesParents() {
+
+app.request.get('http://localhost/licence/API_TodoList/tache.php').then(function (res) {
+    var response = JSON.parse(res.data)
+    for(const i of response) {
+		
+		app.request.get('http://localhost/licence/API_TodoList/tacheParent.php?idType='+i.id).then(function (res2) {
+		var response2 = JSON.parse(res2.data)
+		for(const j of response2) {
+			$('.tache-'+i.id).append(`
+				<p>${j.name} -></p>
+			`);
+
+		}	
+		}).catch(function (err) {
+			console.log(err.xhr)
+			console.log(err.status)
+			console.log(err.message)
+		})
+    }
+
+	
+}).catch(function (err) {
+    console.log(err.xhr)
+    console.log(err.status)
+    console.log(err.message)
+})
+
+}
+
+setTimeout(function(){
+    showTachesTypes();
+}, 500);
+
+function showTachesTypes() {
+
+	app.request.get('http://localhost/licence/API_TodoList/tacheType.php').then(function (res) {
+    var response = JSON.parse(res.data)
+    for(const i of response) {
+		$('.tache-'+i.id).append(`
+			<p>${i.name}</p>
+		`);
+    }
+
+	
+}).catch(function (err) {
+    console.log(err.xhr)
+    console.log(err.status)
+    console.log(err.message)
+})
+
+
+}
