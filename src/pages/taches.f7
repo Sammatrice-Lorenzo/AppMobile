@@ -65,12 +65,15 @@
             })
 
 
-            Framework7.request.get('http://localhost/licence/API_TodoList/tacheType.php').then(function (res) {
+            Framework7.request.get('http://localhost/licence/API_TodoList/tacheAll.php').then(function (res) {
                 var response = JSON.parse(res.data)
-                for (const i of response) {
-            $$('.tache-' + i.id).append(`
-			<p>${i.name}</p>
+                for (const j of response) {
+                    
+            $$('.tache-' + j.id).append(`
+			<br><span>[${j.nameParent}] ${j.name}</span>
             `);
+
+            
             }
             }).catch(function (err) {
                 console.log(err.xhr)
