@@ -22,7 +22,8 @@
                                 <div class="item-inner">
                                     <div class="item-title item-label">Nom</div>
                                     <div class="item-input-wrap">
-                                        <input class="listName required" name="nom" type="text" id="nameList" placeholder="Le nom de la list" />
+                                        <input class="listName required" name="nom" type="text" id="nameList"
+                                            placeholder="Le nom de la list" />
                                         <input name="idList" type="text" id="idList" style="display: none;" />
                                     </div>
                                 </div>
@@ -31,13 +32,11 @@
                     </ul>
                 </div>
             </form>
-            <div class="block-title">
-                <p class="row">
-                    <a id="button-insert" class="button button-round button-fill button-insert">Enregister</a>
-                </p>
-                <p class="row">
-                    <a id="button-delete" class="button button-round button-fill button-delete">Supprimer</a>
-                </p>
+            <div class="block-title page-content display-flex flex-direction-column justify-content-center">
+                <div>
+                    <a id="button-insert" class="button button-round button-fill button-insert" style="padding: 10px 0px;"><i class="f7-icons if-not-md">checkmark_circle</i>Enregister</a>
+                    <a id="button-delete" class="button button-round button-fill button-delete" style="padding: 10px 0px; margin-top: 10px;"><i class="f7-icons if-not-md">trash_fill</i>Supprimer</a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,7 +45,7 @@
     import Dom7 from 'Dom7';
     import Framework7 from 'framework7/bundle';
 
-    export default (props, { $on, $f7 }) => {
+    export default (props, { $on, $f7, $f7router }) => {
         var $$ = Dom7;
         $on('pageInit', () => {
 
@@ -73,7 +72,7 @@
                         method: 'PUT',
                         data: formData,
                         success: function (data, status, xhr) {
-                            console.log(data);
+                            if(data) alert("La modification a bien été prise en compte")
                         },
                     })
                 }
@@ -81,18 +80,18 @@
                     addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une list !")
                 }
             });
-            
+
             $$('.button-delete').on('click', function () {
                 var formData = $f7.form.convertToData('#my-form');
-                if(confirmer()) {
+                if (confirmer()) {
                     Framework7.request({
                         url: "http://localhost/licence/API_TodoList/list.php",
                         dataType: 'json',
                         contentType: "application/json",
                         method: 'DELETE',
-                        data: {"id" : formData.idList},
+                        data: { "id": formData.idList },
                         success: function (data, status, xhr) {
-                            console.log(data);
+                            if(data) $f7router.navigate('/');
                         },
                     })
                 }

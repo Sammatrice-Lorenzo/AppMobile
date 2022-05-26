@@ -8,7 +8,6 @@
                     <div class="left">
                         <a href="#" class="link back">
                             <i class="icon icon-back">
-                                <!-- <span class="if-not-md">Retour</span> -->
                             </i>
                         </a>
                     </div>
@@ -30,7 +29,6 @@
         <div class="page-content">
             <div class="divTaches">
                 <p>Taches</p>
-
             </div>
         </div>
     </div>
@@ -39,14 +37,14 @@
     import Dom7 from 'Dom7';
     import Framework7 from 'framework7/bundle';
 
-    export default (props, { $on, $f7, $f7router }) => {
+    export default (props, { $on, $f7, $f7router}) => {
         $on('pageInit', () => {
             var $$ = Dom7;
             var idList = $f7router.currentRoute.params.id
             var nameList = $f7router.currentRoute.params.name
 
-            $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}">Modifier la list</a></p>`);
-
+            $$('.divTaches').append(`<a class='button' href='/formTache/${idList}' style="margin-top: 15px;"><i class="f7-icons if-not-md">plus_rectangle</i></a>`);
+            $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}"><i class="f7-icons if-not-md">square_pencil</i>Modifier la list</a></p>`);
 
             Framework7.request.get('http://localhost/licence/API_TodoList/tachesByIdList?idList='+idList+'.php').then(function (res) {
                 var response = JSON.parse(res.data)
@@ -87,17 +85,4 @@
 
         return $render;
     };
-
-    function toggle(id) {
-        a = document.getElementById('toggle_' + id);
-        b = document.getElementById('display_' + id);
-        if (a.style.display == 'block') {
-            a.style.display = 'none';
-            b.innerHTML = 'Show Discussion';
-        }
-        else {
-            a.style.display = 'block';
-            b.innerHTML = 'Hide Discussion';
-        }
-    }
 </script>

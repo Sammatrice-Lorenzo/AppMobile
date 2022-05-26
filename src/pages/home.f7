@@ -20,9 +20,8 @@
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="divList">
-                <div class="divTaches"></div>
                 <p>Listes</p>
-                <a class="button button-small button-rou.nd button-fill add" href="/form/">Ajouter des list</a>
+                <a class="button button-small button-rou.nd button-fill add" href="/form/"><i class="f7-icons if-not-md" style="font-size: 15px; margin-right: 10px;">plus_rectangle </i> Ajouter des list</a>
             </div>
         </div>
     </div>
@@ -30,19 +29,5 @@
 <script>
     export default () => {
         return $render;
-        $$('.divTaches').empty();
-    }
-    
-    function toggle(id) {
-        a = document.getElementById('toggle_' + id);
-        b = document.getElementById('display_' + id);
-        if (a.style.display == 'block') {
-            a.style.display = 'none';
-            b.innerHTML = 'Show Discussion';
-        }
-        else {
-            a.style.display = 'block';
-            b.innerHTML = 'Hide Discussion';
-        }
     }
 </script>
