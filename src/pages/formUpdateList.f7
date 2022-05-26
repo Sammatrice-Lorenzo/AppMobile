@@ -34,8 +34,8 @@
             </form>
             <div class="block-title page-content display-flex flex-direction-column justify-content-center">
                 <div>
-                    <a id="button-insert" class="button button-round button-fill button-insert" style="padding: 10px 0px;"><i class="f7-icons if-not-md">checkmark_circle</i>Enregister</a>
-                    <a id="button-delete" class="button button-round button-fill button-delete" style="padding: 10px 0px; margin-top: 10px;"><i class="f7-icons if-not-md">trash_fill</i>Supprimer</a>
+                    <a id="button-insert" class="button button-round button-fill button-insert" style="padding: 10px 0px;"><i class="f7-icons">checkmark_circle</i>Enregister</a>
+                    <a id="button-delete" class="button button-round button-fill button-delete" style="padding: 10px 0px; margin-top: 10px;"><i class="f7-icons">trash_fill</i>Supprimer</a>
                 </div>
             </div>
         </div>

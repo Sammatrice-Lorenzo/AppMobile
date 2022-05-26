@@ -21,7 +21,7 @@
         <div class="page-content">
             <div class="divList">
                 <p>Listes</p>
-                <a class="button button-small button-rou.nd button-fill add" href="/form/"><i class="f7-icons if-not-md" style="font-size: 15px; margin-right: 10px;">plus_rectangle </i> Ajouter des listes</a>
+                <a class="button button-small button-rou.nd button-fill add" href="/form/"><i class="f7-icons" style="font-size: 15px; margin-right: 10px;">plus_rectangle </i> Ajouter des listes</a>
             </div>
         </div>
     </div>
