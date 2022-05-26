@@ -20,10 +20,12 @@
                         <li>
                             <div class="item-content item-input">
                                 <div class="item-inner">
-                                <div class="item-title item-label">Nom</div>
-                                <div class="item-input-wrap">
-                                    <input class="tacheName required" name="nom" type="text" placeholder="Le nom de la tâche"/>
-                                </div>
+                                    <div class="item-title item-label">Nom</div>
+                                    <div class="item-input-wrap">
+                                        <input class="tacheName required" name="nom" type="text" id="nameTache"
+                                            placeholder="Le nom de la tâche" />
+                                        <input name="idTache" type="text" id="idTache" style="display: none;" />
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -33,16 +35,16 @@
                     <ul>
                         <li>
                             <select id="selectTypes" name="idType">
-                                <option value="type">Veuillez sélection un type</option>
+                                <option value="type">Veuillez sélectionner un type</option>
                             </select>
                         </li>
                     </ul>
                 </div>
             </form>
-            <div class="block-title">
-                <p class="row">
-                    <a id="button-insert" class="button button-round button-fill button-insert">Enregister</a>
-                </p>
+            <div class="block-title page-content display-flex flex-direction-column justify-content-center">
+                <div>
+                    <a id="button-insert" class="button button-round button-fill button-insert" style="font-size: 15px;"><i class="f7-icons if-not-md">checkmark_circle</i>Enregister</a>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +70,6 @@
                         <option value='${i.id}'>${i.name}</option>
                     `)
                 }
-                console.log(response)
             }).catch(function (err) {
                 console.log(err.xhr)
                 console.log(err.status)
@@ -84,19 +85,20 @@
 
             $$('.button-insert').on('click', function () {
                 var formData = $f7.form.convertToData('#my-form');
-                console.log(formData)
-                if (formData.nom) {
+                if(!formData.nom) addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tâche !")
+                else if(formData.idType == "type") alert("Veuillez sélectionner un type valide")
+                else {
                     Framework7.request.postJSON('http://localhost/licence/API_TodoList/tache.php', {nom : formData.nom, idType : formData.idType, idlist : list}).then(function (res) {
-                        console.log("success")
+                        if(res) {
+                            alert("L'insertion a bien été prise en compte")
+                            $$('.tacheName').remove()
+                            $$('.item-input-wrap').append("<input class='tacheName required' name='nom' type='text' id='nameTache'placeholder='Le nom de la tâche'/>")
+                        }
                     }).catch(function (err) {
                         console.log(err.xhr)
                         console.log(err.status)
                         console.log(err.message)
                     })
-                }
-                else if(formData.idType == "type") addInvalidMsg($$('.selectTypes'), "Veuillez sélectionner un type valide")
-                else {
-                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tâche !")
                 }
             });
         });

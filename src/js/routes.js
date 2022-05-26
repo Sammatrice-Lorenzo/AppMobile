@@ -20,12 +20,12 @@ var routes = [
     {
         path: '/taches/:name/:id',
         component: Taches,
-        on: 
+        on:
         {
-            pageInit: function(e,page){ 
+            pageInit: function (e, page) {
                 var prop = page.route.params;
                 var title = $('.title-list')[0]
-                $(title).append(`<label class='${prop.name}'>${prop.name}</label>`) 
+                $(title).append(`<label class='${prop.name}'>${prop.name}</label>`)
             }
         },
     },
@@ -44,9 +44,9 @@ var routes = [
     {
         path: '/formUpdateList/:name/:id',
         component: FormUpdateList,
-        on: 
+        on:
         {
-            pageInit: function(e,page){ 
+            pageInit: function (e, page) {
                 var prop = page.route.params;
                 $('#nameList').value(prop.name)
                 $('#idList').value(prop.id)
@@ -56,11 +56,10 @@ var routes = [
     {
         path: '/formUpdateTache/:name/:id/:idList',
         component: FormUpdateTache,
-        on: 
+        on:
         {
-            pageInit: function(e,page){ 
+            pageInit: function (e, page) {
                 var prop = page.route.params;
-                console.log( $('#nameTache') );
                 $('#nameTache').value(prop.name)
                 $('#idTache').value(prop.id)
             }
@@ -73,48 +72,48 @@ var routes = [
     {
         path: '/request-and-load/user/:userId/',
         async: function ({ router, to, resolve }) {
-        // App instance
-        var app = router.app;
+            // App instance
+            var app = router.app;
 
-        // Show Preloader
-        app.preloader.show();
+            // Show Preloader
+            app.preloader.show();
 
-        // User ID from request
-        var userId = to.params.userId;
+            // User ID from request
+            var userId = to.params.userId;
 
-        // Simulate Ajax Request
-        setTimeout(function () {
-            // We got user data from request
-            var user = {
-            firstName: 'Vladimir',
-            lastName: 'Kharlampidi',
-            about: 'Hello, i am creator of Framework7! Hope you like it!',
-            links: [
-                {
-                title: 'Framework7 Website',
-                url: 'http://framework7.io',
-                },
-                {
-                title: 'Framework7 Forum',
-                url: 'http://forum.framework7.io',
-                },
-            ]
-            };
-            // Hide Preloader
-            app.preloader.hide();
+            // Simulate Ajax Request
+            setTimeout(function () {
+                // We got user data from request
+                var user = {
+                    firstName: 'Vladimir',
+                    lastName: 'Kharlampidi',
+                    about: 'Hello, i am creator of Framework7! Hope you like it!',
+                    links: [
+                        {
+                            title: 'Framework7 Website',
+                            url: 'http://framework7.io',
+                        },
+                        {
+                            title: 'Framework7 Forum',
+                            url: 'http://forum.framework7.io',
+                        },
+                    ]
+                };
+                // Hide Preloader
+                app.preloader.hide();
 
-            // Resolve route to load page
-            resolve(
-            {
-                component: RequestAndLoad,
-            },
-            {
-                props: {
-                user: user,
-                }
-            }
-            );
-        }, 1000);
+                // Resolve route to load page
+                resolve(
+                    {
+                        component: RequestAndLoad,
+                    },
+                    {
+                        props: {
+                            user: user,
+                        }
+                    }
+                );
+            }, 1000);
         },
     },
     {

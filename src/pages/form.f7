@@ -20,20 +20,21 @@
                         <li>
                             <div class="item-content item-input">
                                 <div class="item-inner">
-                                <div class="item-title item-label">Nom</div>
-                                <div class="item-input-wrap">
-                                    <input class="listName required" name="nom" type="text" placeholder="Le nom de la list"/>
-                                </div>
+                                    <div class="item-title item-label">Nom</div>
+                                    <div class="item-input-wrap">
+                                        <input class="listName required" name="nom" type="text" id="nameList"
+                                            placeholder="Le nom de la list" />
+                                    </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
             </form>
-            <div class="block-title">
-                <p class="row">
-                    <a id="button-insert" class="button button-round button-fill button-insert">Enregister</a>
-                </p>
+            <div class="block-title page-content display-flex flex-direction-column justify-content-center">
+                <div>
+                    <a id="button-insert" class="button button-round button-fill button-insert" style="padding: 10px 0px;"><i class="f7-icons if-not-md">checkmark_circle</i>Enregister</a>
+                </div>
             </div>
         </div>
     </div>
@@ -62,7 +63,12 @@
                 var formData = $f7.form.convertToData('#my-form');
                 if(formData.nom) {
                     Framework7.request.postJSON('http://localhost/licence/API_TodoList/list.php', formData).then(function (res) {
-                        console.log("success")
+                        if(res) {
+                            alert("L'insertion a bien été prise en compte")
+                            $$('.listName').remove()
+                            $$('.item-input-wrap').append("<input class='listName required' name='nom' type='text' id='nameList'placeholder='Le nom de la list'/>")
+                        }
+
                     }).catch(function (err) {
                         console.log(err.xhr)
                         console.log(err.status)
