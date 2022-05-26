@@ -76,7 +76,6 @@
                 console.log(err.message)
             })
 
-
             function addInvalidMsg(el, msg) {
                 $$(el).closest(".item-content").addClass("item-input-with-error-message item-input-invalid");
                 $$(el).addClass("input-invalid");
