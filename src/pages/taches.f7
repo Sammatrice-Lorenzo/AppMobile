@@ -52,7 +52,7 @@
                 var response = JSON.parse(res.data)
                 for (const i of response) {
                     $$('.divTaches').append(`
-                            <p><a class="toggle" href="/formUpdateTache/${i.name}/${i.id}/${idList}">${i.name}</a></p>
+                            <p class="tache-${i.id}"><a class="toggle" href="/formUpdateTache/${i.name}/${i.id}/${idList}">${i.name}</a></p>
                             <div class="toggle-content" id="">
                                 <ul></ul>
                             </div>
@@ -63,6 +63,23 @@
                 console.log(err.status)
                 console.log(err.message)
             })
+
+
+            Framework7.request.get('http://localhost/licence/API_TodoList/tacheType.php').then(function (res) {
+                var response = JSON.parse(res.data)
+                for (const i of response) {
+            $$('.tache-' + i.id).append(`
+			<p>${i.name}</p>
+            `);
+            }
+            }).catch(function (err) {
+                console.log(err.xhr)
+                console.log(err.status)
+                console.log(err.message)
+            })
+            
+
+
         });
 
         return $render;
