@@ -13,15 +13,15 @@
         <!-- Toolbar-->
         <div class="toolbar toolbar-bottom">
             <div class="toolbar-inner">
-                <a href="#" class="link">Left Link</a>
-                <a href="#" class="link">Right Link</a>
+                <a href="#" class="link">Web Apps</a>
+                <a href="#" class="link">Le Rebours</a>
             </div>
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="divList">
                 <p>Listes</p>
-                <a class="button button-small button-rou.nd button-fill add" href="/form/"><i class="f7-icons if-not-md" style="font-size: 15px; margin-right: 10px;">plus_rectangle </i> Ajouter des list</a>
+                <a class="button button-small button-rou.nd button-fill add" href="/form/"><i class="f7-icons if-not-md" style="font-size: 15px; margin-right: 10px;">plus_rectangle </i> Ajouter des listes</a>
             </div>
         </div>
     </div>

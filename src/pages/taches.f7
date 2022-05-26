@@ -21,15 +21,16 @@
         <!-- Toolbar-->
         <div class="toolbar toolbar-bottom">
             <div class="toolbar-inner">
-                <a href="#" class="link">Left Link</a>
-                <a href="#" class="link">Right Link</a>
+                <a href="#" class="link">Web Apps</a>
+                <a href="#" class="link">Le Rebours</a>
             </div>
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="divTaches">
-                <p>Taches</p>
+                <p>Tâches</p>
             </div>
+            <div class="editList"></div>
         </div>
     </div>
 </template>
@@ -43,14 +44,14 @@
             var idList = $f7router.currentRoute.params.id
             var nameList = $f7router.currentRoute.params.name
 
-            $$('.divTaches').append(`<a class='button' href='/formTache/${idList}' style="margin-top: 15px;"><i class="f7-icons if-not-md">plus_rectangle</i></a>`);
-            $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}"><i class="f7-icons if-not-md">square_pencil</i>Modifier la list</a></p>`);
+            $$('.divTaches').append(`<a class='button button button-small button-rou.nd button-fill' href='/formTache/${idList}' style="margin-top: 15px;"><i class="f7-icons if-not-md" style="font-size :20px; margin-right: 10px;">plus_rectangle</i>Ajouter des tâches</a>`);
+            $$('.editList').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}"><i class="f7-icons if-not-md" style="font-size :20px; margin-right: 10px;">square_pencil</i>Modifier la list</a></p>`);
 
             Framework7.request.get('http://localhost/licence/API_TodoList/tachesByIdList?idList=' + idList + '.php').then(function (res) {
                 var response = JSON.parse(res.data)
                 for (const i of response) {
                     $$('.divTaches').append(`
-                            <p class="tache-${i.id}"><a class="toggle" href="/formUpdateTache/${i.name}/${i.id}/${idList}">${i.name}</a></p>
+                            <p class="tache-${i.id}"><a class="toggle" href="/formUpdateTache/${i.name}/${i.id}/${idList}"><i class="f7-icons if-not-md" style="font-size :20px; margin-right: 10px;">square_pencil</i>${i.name}</a></p>
                             <div class="toggle-content" id="">
                                 <ul></ul>
                             </div>

@@ -9,12 +9,12 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">Modifier la tache</div>
+                <div class="title">Modifier la tâche</div>
             </div>
         </div>
         <div class="page-content">
             <form class="list" id="my-form">
-                <div class="block-title">Tache</div>
+                <div class="block-title">Tâche</div>
                 <div class="list no-hairlines-md">
                     <ul>
                         <li>
@@ -23,7 +23,7 @@
                                     <div class="item-title item-label">Nom</div>
                                     <div class="item-input-wrap">
                                         <input class="tacheName required" name="nom" type="text" id="nameTache"
-                                            placeholder="Le nom de la tache" />
+                                            placeholder="Le nom de la tâche" />
                                         <input name="idTache" type="text" id="idTache" style="display: none;" />
                                     </div>
                                 </div>
@@ -43,8 +43,8 @@
             </form>
             <div class="block-title page-content display-flex flex-direction-column justify-content-center">
                 <div>
-                    <a id="button-insert" class="button button-round button-fill button-insert" style="font-size: 15px;"><i class="f7-icons if-not-md">checkmark_circle</i>Enregister</a>
-                    <a id="button-delete" class="button button-round button-fill button-delete" style="font-size: 15px; margin-top: 10px;"><i class="f7-icons if-not-md">trash_fill</i>Supprimer</a>
+                    <a id="button-insert" class="button button-round button-fill button-insert" style="font-size: 15px;"><i class="f7-icons if-not-md"  style="font-size :20px; margin-right: 10px;">checkmark_circle</i>Enregister</a>
+                    <a id="button-delete" class="button button-round button-fill button-delete" style="font-size: 15px; margin-top: 10px;"><i class="f7-icons if-not-md" style="font-size :20px; margin-right: 10px;">trash_fill</i>Supprimer</a>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
                     })
                 }
                 else {
-                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tache !")
+                    addInvalidMsg($$('.tacheName'), "Veuillez saisir un nom d'une tâche !")
                 }
             });
 

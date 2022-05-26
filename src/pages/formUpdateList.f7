@@ -9,12 +9,12 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">Modifier la list</div>
+                <div class="title">Modifier la liste</div>
             </div>
         </div>
         <div class="page-content">
             <form class="list" id="my-form">
-                <div class="block-title">List</div>
+                <div class="block-title">Liste</div>
                 <div class="list no-hairlines-md">
                     <ul>
                         <li>
@@ -23,7 +23,7 @@
                                     <div class="item-title item-label">Nom</div>
                                     <div class="item-input-wrap">
                                         <input class="listName required" name="nom" type="text" id="nameList"
-                                            placeholder="Le nom de la list" />
+                                            placeholder="Le nom de la liste" />
                                         <input name="idList" type="text" id="idList" style="display: none;" />
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                     })
                 }
                 else {
-                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une list !")
+                    addInvalidMsg($$('.listName'), "Veuillez saisir un nom d'une liste !")
                 }
             });
 
