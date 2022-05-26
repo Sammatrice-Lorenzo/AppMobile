@@ -37,7 +37,7 @@
     import Dom7 from 'Dom7';
     import Framework7 from 'framework7/bundle';
 
-    export default (props, { $on, $f7, $f7router}) => {
+    export default (props, { $on, $f7, $f7router }) => {
         $on('pageInit', () => {
             var $$ = Dom7;
             var idList = $f7router.currentRoute.params.id
@@ -46,7 +46,7 @@
             $$('.divTaches').append(`<a class='button' href='/formTache/${idList}' style="margin-top: 15px;"><i class="f7-icons if-not-md">plus_rectangle</i></a>`);
             $$('.divTaches').append(`<p><a class="button button-small button-rou.nd button-fill update" href="/formUpdateList/${nameList}/${idList}"><i class="f7-icons if-not-md">square_pencil</i>Modifier la list</a></p>`);
 
-            Framework7.request.get('http://localhost/licence/API_TodoList/tachesByIdList?idList='+idList+'.php').then(function (res) {
+            Framework7.request.get('http://localhost/licence/API_TodoList/tachesByIdList?idList=' + idList + '.php').then(function (res) {
                 var response = JSON.parse(res.data)
                 for (const i of response) {
                     $$('.divTaches').append(`
@@ -62,25 +62,16 @@
                 console.log(err.message)
             })
 
-
             Framework7.request.get('http://localhost/licence/API_TodoList/tacheAll.php').then(function (res) {
                 var response = JSON.parse(res.data)
                 for (const j of response) {
-                    
-            $$('.tache-' + j.id).append(`
-			<br><span>[${j.nameParent}] ${j.name}</span>
-            `);
-
-            
-            }
+                    $$('.tache-' + j.id).append(`<br><span>[${j.nameParent}] ${j.name}</span>`);
+                }
             }).catch(function (err) {
                 console.log(err.xhr)
                 console.log(err.status)
                 console.log(err.message)
             })
-            
-
-
         });
 
         return $render;
